@@ -7,7 +7,7 @@ class App extends React.Component {
     return (
       <div>
         <Form />
-        <Card cardTrunfo={ cardTrunfo } />
+        <Card />
       </div>
     );
   }
