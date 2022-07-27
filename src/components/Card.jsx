@@ -2,13 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Card extends Component {
-  // constructor() {
-  //   super();
-  //   this.state = {
-  //     cardTrunfo: false,
-  //   };
-  // }
-
   render() {
     const {
       cardName,
