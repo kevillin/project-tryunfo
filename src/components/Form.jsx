@@ -2,21 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Form extends Component {
-  // state = {
-  //   cardName: '',
-  //   cardDescription,
-  //   cardAttr1,
-  //   cardAttr2,
-  //   cardAttr3,
-  //   cardImage,
-  //   cardRare,
-  //   cardTrunfo,
-  //   // hasTrunfo,
-  //   isSaveButtonDisabled,
-  //   onInputChange,
-  //   onSaveButtonClick,
-  // }
-
   render() {
     const {
       cardName,

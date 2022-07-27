@@ -10,9 +10,11 @@ class App extends React.Component {
     cardAttr2: null,
     cardAttr3: null,
     cardImage: '',
-    cardRare: false,
+    cardRare: 'normal',
     cardTrunfo: false,
     isSaveButtonDisabled: true,
+    // hasTrunfo: false,
+    arrayNovo: [],
   }
 
   onInputChange = ({ target }) => {
@@ -32,6 +34,7 @@ class App extends React.Component {
       const number = 90;
       const number210 = 210;
       const attr = Number(cardAttr1) + Number(cardAttr2) + Number(cardAttr3) > number210;
+
       const buttonIsDisable = cardName.length === 0
         || cardDescription.length === 0
         || cardImage.length === 0
@@ -42,13 +45,49 @@ class App extends React.Component {
         || cardAttr3 > number
         || cardAttr3 < 0;
 
-      const naosei = attr || buttonIsDisable;
+      const finalValidaBotao = attr || buttonIsDisable;
 
       this.setState({
-        isSaveButtonDisabled: naosei,
+        isSaveButtonDisabled: finalValidaBotao,
       });
     });
   }
+
+  onSaveButtonClick = (event) => {
+    event.preventDefault();
+    const {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    } = this.state;
+
+    const objNovo = {
+      cardName,
+      cardDescription,
+      cardAttr1,
+      cardAttr2,
+      cardAttr3,
+      cardImage,
+      cardRare,
+      cardTrunfo,
+    };
+
+    this.setState((prevState) => ({
+      arrayNovo: [...prevState.arrayNovo, objNovo],
+      cardName: '',
+      cardDescription: '',
+      cardImage: '',
+      cardAttr1: 0,
+      cardAttr2: 0,
+      cardAttr3: 0,
+      cardRare: false,
+    }));
+  };
 
   render() {
     const {
@@ -61,6 +100,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       isSaveButtonDisabled,
+      arrayNovo,
     } = this.state;
     return (
       <div>
@@ -75,6 +115,7 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
           isSaveButtonDisabled={ isSaveButtonDisabled }
+          onSaveButtonClick={ this.onSaveButtonClick }
         />
         <Card
           onInputChange={ this.onInputChange }
@@ -87,6 +128,18 @@ class App extends React.Component {
           cardRare={ cardRare }
           cardTrunfo={ cardTrunfo }
         />
+        {arrayNovo.map((element) => (
+          <div key={ element.cardName }>
+            <h1>{element.cardName}</h1>
+            <img src={ element.cardImage } alt={ element.cardDescription } />
+            <p>
+              { element.cardDescription }
+            </p>
+            <p>{ element.cardAttr1 }</p>
+            <p>{ element.cardAttr2 }</p>
+            <p>{ element.cardAttr3 }</p>
+          </div>
+        )) }
       </div>
     );
   }
